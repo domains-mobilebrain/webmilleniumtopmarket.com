@@ -8,7 +8,6 @@ if (!$app_name) {
   die;
 }else{
   if ($cloaker_id) {
-
     $db = new DB();
     $sql = "SELECT `key_word_quiet` , `key_word_money` , `apps_money` FROM `APP_API` WHERE `id_name` = ? ";
     $params = [$decypted_app_name];
@@ -18,9 +17,6 @@ if (!$app_name) {
       if ($result['apps_money'] == 'Quiet') {
         die;
       }
-
-
-
     $uid="tw3j27k4bhm99oldqdu5cx9ww";
     $qu=$_SERVER["QUERY_STRING"];
     $ch = curl_init();
@@ -64,15 +60,7 @@ if (!$app_name) {
        }
      }
    }
-
-
-
 }
-
-
-
-
-
   }else{
 
   $db = new DB();
