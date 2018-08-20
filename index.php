@@ -3,11 +3,24 @@ $app_name = $_GET['apn'];
 $cloaker_id =$_GET['clcr'];
 $decypted_app_name = base64_decode($app_name);
 $cloaker_id = base64_decode($cloaker_id);
+include('config/DB.php');
 if (!$app_name) {
   die;
 }else{
   if ($cloaker_id) {
-    
+
+    $db = new DB();
+    $sql = "SELECT `key_word_quiet` , `key_word_money` , `apps_money` FROM `APP_API` WHERE `id_name` = ? ";
+    $params = [$decypted_app_name];
+    $result = $db->query($sql,$params);
+    if ($result) {
+      $result = $db->fetch()[0];
+      if ($result['apps_money'] == 'Quiet') {
+        die;
+      }
+
+
+
     $uid="tw3j27k4bhm99oldqdu5cx9ww";
     $qu=$_SERVER["QUERY_STRING"];
     $ch = curl_init();
@@ -62,7 +75,6 @@ if (!$app_name) {
 
   }else{
 
-  include('config/DB.php');
   $db = new DB();
   $sql = "SELECT `key_word_quiet` , `key_word_money` , `apps_money` FROM `APP_API` WHERE `id_name` = ? ";
   $params = [$decypted_app_name];
